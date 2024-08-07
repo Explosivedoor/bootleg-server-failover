@@ -18,4 +18,12 @@ Let's start with the things you will need for this:
 6. Setup your domain with cloudflare. In the A record put in your current IP address (don't worry if you have a dynamic IP, we will cover that in a second). Make sure proxy is ON. This will hide your real ip from the internet.
 7. On your home server download the following file: https://github.com/K0p1-Git/cloudflare-ddns-updater and make sure to fill it out correctly (use nano). What this does, is it update the ip address of the A record if it changes from what was there previously. Allowing you, with your dynamic IP, to not have to worry about it changing. This will also help with server failover.
 8. After you fill in the information you must add it to your crontab TODO:code. Set it for whatever length of time you want, usually 5min is fast enough but you can go with 1min.
-9. Check now and see if you can access your website. Try and change the A record manually via the cloudflare dashboard and make sure it switches back in the time that you set. If it didn't, you probably missed something. 
+9. Check now and see if you can access your website. Try and change the A record manually via the cloudflare dashboard and make sure it switches back in the time that you set. If it didn't, you probably missed something.
+10. Set up a url on your Home server that is ONLY on your home server. I have mine set up to be on example.com/checkstatus. This url will be used by the off-site server to check on the homeserver to see if its alive. You can also make it a subdomain like checkstatus.example.com. 
+    
+# Off-Site Server Side Setup
+## In this I will explain using cpanel but will include how to do it on a normal machine as well. The python code will check the http code of your website, if it returns anything other than 200 "OK" it will switch to backup mode. 
+1. It is best practice (at least for me) to have a server that is in a different location, just in case the disruption is more than a local internet or power issue. I have my backup sever in the US and the main server in Japan.
+2. Create a python enviorment on your off-site server ```python -m venv /path/to/new/virtual/environment```
+3. Activate the enviroment ```source {your_folder_name}/bin/activate``` via the CLI.
+4. (optional) If you want to get telegram messages when your server goes down use ```pip install telegram_send``` . You will also need to setup a bot with your telegram account. A good guide is here : https://www.freecodecamp.org/news/how-to-create-a-telegram-bot-using-python/ then to configure it ```telegram-send --configure```. For more info go here : https://pypi.org/project/telegram-send/#installation . 
