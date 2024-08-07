@@ -22,7 +22,7 @@ Let's start with the things you will need for this:
 10. Set up a url on your Home server that is ONLY on your home server. I have mine set up to be on example.com/checkstatus. This url will be used by the off-site server to check on the homeserver to see if its alive. You can also make it a subdomain like checkstatus.example.com. 
     
 # Off-Site Server Side Setup
-### In this I will explain using cpanel but will include how to do it on a normal machine as well. The python code will check the http code of your website, if it returns anything other than 200 "OK" it will switch to backup mode. 
+In this I will explain using cpanel but will include how to do it on a normal machine as well. The python code will check the http code of your website, if it returns anything other than 200 "OK" it will switch to backup mode. 
 1. It is best practice (at least for me) to have a server that is in a different location, just in case the disruption is more than a local internet or power issue. I have my backup sever in the US and the main server in Japan.
 2. Create a python enviorment on your off-site server ```python -m venv /path/to/new/virtual/environment```
 3. Activate the enviroment ```source {your_folder_name}/bin/activate``` via the CLI.
